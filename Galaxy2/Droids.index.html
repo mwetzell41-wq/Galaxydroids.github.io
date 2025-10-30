@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Galaxy Droids — Portafolio</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:#e6f3ff;background:#020612}
+
+/* Estrellas animadas (no requiere imágenes) */
+.starfield,.starfield2,.starfield3{
+  position:fixed;inset:0;z-index:-1;pointer-events:none;background-repeat:repeat;animation:rise linear infinite
+}
+.starfield{background-image:
+  radial-gradient(1px 1px at 10px 20px,#fff,transparent 60%),
+  radial-gradient(1px 1px at 80px 140px,#fff,transparent 60%),
+  radial-gradient(1px 1px at 150px 60px,#fff,transparent 60%),
+  radial-gradient(1px 1px at 220px 200px,#fff,transparent 60%),
+  radial-gradient(1px 1px at 300px 120px,#fff,transparent 60%),
+  radial-gradient(1px 1px at 360px 260px,#fff,transparent 60%),
+  radial-gradient(1px 1px at 420px 40px,#fff,transparent 60%),
+  radial-gradient(1px 1px at 500px 180px,#fff,transparent 60%);
+  background-size:600px 600px;opacity:.9;animation-duration:80s}
+.starfield2{background-image:
+  radial-gradient(2px 2px at 40px 80px,#ffffff,transparent 60%),
+  radial-gradient(2px 2px at 200px 300px,#ffffff,transparent 60%),
+  radial-gradient(2px 2px at 360px 160px,#ffffff,transparent 60%),
+  radial-gradient(2px 2px at 520px 420px,#ffffff,transparent 60%);
+  background-size:900px 900px;opacity:.55;animation-duration:120s}
+.starfield3{background-image:
+  radial-gradient(1px 1px at 180px 200px,#cfe6ff,transparent 60%),
+  radial-gradient(1px 1px at 600px 420px,#e8f4ff,transparent 60%),
+  radial-gradient(1px 1px at 820px 260px,#cde2ff,transparent 60%),
+  radial-gradient(1px 1px at 1200px 640px,#ffffff,transparent 60%);
+  background-size:1200px 1200px;opacity:.4;animation-duration:160s}
+@keyframes rise{from{background-position:0 0}to{background-position:0 -1200px}}
+
+/* Header */
+.header{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:14px 22px;background:linear-gradient(180deg,rgba(6,11,25,.92),rgba(6,11,25,.6));border-bottom:1px solid #ffffff1f;backdrop-filter:blur(6px)}
+.brand{display:flex;align-items:center;gap:14px}
+.brand h1{font-weight:800;letter-spacing:.4px;font-size:clamp(22px,2.6vw,36px);color:#d9ecff}
+.brand small{display:block;color:#7ac7ff;font-weight:700;letter-spacing:.18em;font-size:12px;text-transform:uppercase;margin-top:2px}
+.robot-badge{width:68px;height:68px;border-radius:18px;display:grid;place-items:center;background:radial-gradient(circle at 70% 30%, #0ff2, transparent 40%), #0a1226;box-shadow:0 8px 26px #00f0ff33, inset 0 0 0 1px #ffffff14}
+.members{display:flex;gap:8px;flex-wrap:wrap}
+.member{background:#15254d80;border:1px solid #ffffff22;padding:6px 10px;border-radius:999px;color:#d9ecff;font-size:12px}
+
+/* Escena */
+.scene{position:relative;height:calc(100vh - 86px);display:flex;align-items:center;justify-content:center}
+.sun{position:absolute;width:190px;height:190px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffd56d,#ff8f00 45%,#b24c00 70%);box-shadow:0 0 40px 18px #ffc44d33,0 0 140px 40px #ffa60029}
+
+/* Órbitas (rotan); IMPORTANT: no bloquean clics */
+.orbit{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:var(--d);height:var(--d);border:1px solid #ffffff26;border-radius:50%;
+  animation:spin var(--speed) linear infinite;pointer-events:none; /* <-- clave */
+}
+@keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+
+/* Planetas (clickeables por encima de todo) */
+.planet{
+  position:absolute;left:50%;top:0%;transform:translate(-50%,-50%);
+  width:76px;height:76px;border-radius:50%;display:grid;place-items:center;text-decoration:none;cursor:pointer;
+  background:radial-gradient(circle at 30% 30%, var(--c1), var(--c2));
+  box-shadow:0 8px 22px #0008,0 0 26px #00eeff33;transition:filter .25s, box-shadow .25s;
+  pointer-events:auto;z-index:5; /* <-- clave */
+}
+.planet:hover{filter:brightness(1.1) saturate(1.1);box-shadow:0 10px 26px #000a,0 0 32px #00f7ff66}
+.planet::after{content:attr(data-title);position:absolute;left:50%;transform:translateX(-50%);bottom:calc(100% + 12px);background:#08142fee;border:1px solid #ffffff22;padding:6px 10px;border-radius:8px;color:#dff3ff;font-size:12px;white-space:nowrap;opacity:0;translate:0 4px;transition:.25s ease;pointer-events:none}
+.planet:hover::after{opacity:1;translate:0 0}
+
+/* Logo */
+.badge{width:50px;height:50px;border-radius:50%;background:#0f2147;display:grid;place-items:center;box-shadow:inset 0 0 0 2px #ffffff2a,0 0 14px #6de4ff55}
+.badge svg{width:28px;height:28px;fill:#e6f6ff}
+
+@media (max-width:760px){.robot-badge{display:none}.sun{width:150px;height:150px}}
+</style>
+</head>
+<body>
+  <!-- Estrellas -->
+  <div class="starfield"></div><div class="starfield2"></div><div class="starfield3"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="brand">
+      <div class="robot-badge" aria-hidden="true">
+        <svg viewBox="0 0 100 100" width="56" height="56" aria-hidden="true">
+          <rect x="14" y="30" rx="14" ry="14" width="72" height="50" fill="#0b1f46" stroke="#66f0ff" stroke-width="3"/>
+          <rect x="20" y="36" rx="10" ry="10" width="60" height="38" fill="#0f2a58"/>
+          <circle cx="38" cy="55" r="6" fill="#6df0ff"/><circle cx="62" cy="55" r="6" fill="#6df0ff"/>
+        </svg>
+      </div>
+      <div>
+        <h1>Galaxy Droids</h1>
+        <small>Portafolio</small>
+      </div>
+    </div>
+    <div class="members">
+      <span class="member">Dania Cortijo</span>
+      <span class="member">Ian Feng</span>
+      <span class="member">Mathías Wetzell</span>
+    </div>
+  </header>
+
+  <!-- Sistema -->
+  <main class="scene" aria-label="Sistema solar de navegación">
+    <div class="sun" aria-hidden="true"></div>
+
+    <!-- 1) Acerca de (más cercano) -->
+    <div class="orbit" style="--d:260px; --speed:22s">
+      <a class="planet" href="acerca.html" data-title="Acerca de" style="--c1:#8fd3fe; --c2:#1c66ff">
+        <div class="badge">
+          <svg viewBox="0 0 24 24"><path d="M12 3a2 2 0 0 0-2 2v2a4 4 0 0 0-3 3H5a2 2 0 1 0 0 2h2a4 4 0 0 0 3 3v2a2 2 0 1 0 2 0v-2a4 4 0 0 0 3-3h2a2 2 0 1 0 0-2h-2a4 4 0 0 0-3-3V5a2 2 0 0 0-2-2z"/></svg>
+        </div>
+      </a>
+    </div>
+
+    <!-- 2) Objetivos -->
+    <div class="orbit" style="--d:360px; --speed:30s">
+      <a class="planet" href="objetivos.html" data-title="Objetivos" style="--c1:#b4ffb4; --c2:#00b37a">
+        <div class="badge">
+          <svg viewBox="0 0 24 24"><path d="M12 5a7 7 0 1 1-7 7M12 2v3m0 14v3M4 12H1m22 0h-3M12 8a4 4 0 1 1 0 8"/></svg>
+        </div>
+      </a>
+    </div>
+
+    <!-- 3) Robot -->
+    <div class="orbit" style="--d:480px; --speed:42s">
+      <a class="planet" href="robot.html" data-title="Robot" style="--c1:#a3b7ff; --c2:#5a36ff">
+        <div class="badge">
+          <svg viewBox="0 0 24 24"><path d="M11 3h2v3h-2zM6 7a5 5 0 0 0-5 5v3a4 4 0 0 0 4 4h14a4 4 0 0 0 4-4v-3a5 5 0 0 0-5-5H6Zm3 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm10 0a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"/></svg>
+        </div>
+      </a>
+    </div>
+
+    <!-- 4) Trabajo -->
+    <div class="orbit" style="--d:620px; --speed:56s">
+      <a class="planet" href="trabajo.html" data-title="Trabajo" style="--c1:#ffd6a1; --c2:#ff6b00">
+        <div class="badge">
+          <svg viewBox="0 0 24 24"><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 10a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v6a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4v-6Zm9 3h10"/></svg>
+        </div>
+      </a>
+    </div>
+
+    <!-- 5) Demostración (ya funcionaba) -->
+    <div class="orbit" style="--d:760px; --speed:70s">
+      <a class="planet" href="demostracion.html" data-title="Demostración" style="--c1:#ffb3d6; --c2:#ff007a">
+        <div class="badge">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+      </a>
+    </div>
+  </main>
+</body>
+</html>

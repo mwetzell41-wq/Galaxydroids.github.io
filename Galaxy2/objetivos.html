@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Objetivos — Galaxy Droids</title>
+<style>
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:#e6f3ff;background:#020612;overflow:hidden}
+.starfield,.starfield2,.starfield3{position:fixed;inset:0;z-index:-1;pointer-events:none;background-repeat:repeat;animation:rise linear infinite}
+.starfield{background-image:
+  radial-gradient(1px 1px at 10px 20px,#fff,transparent 60%),
+  radial-gradient(1px 1px at 80px 140px,#fff,transparent 60%);
+  background-size:600px 600px;opacity:.9;animation-duration:80s}
+.starfield2{background-image:
+  radial-gradient(2px 2px at 40px 80px,#fff,transparent 60%),
+  radial-gradient(2px 2px at 200px 300px,#fff,transparent 60%);
+  background-size:900px 900px;opacity:.55;animation-duration:120s}
+.starfield3{background-image:
+  radial-gradient(1px 1px at 180px 200px,#cfe6ff,transparent 60%),
+  radial-gradient(1px 1px at 600px 420px,#e8f4ff,transparent 60%);
+  background-size:1200px 1200px;opacity:.4;animation-duration:160s}
+@keyframes rise{from{background-position:0 0}to{background-position:0 -1200px}}
+main{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;text-align:center;padding:0 10%}
+h1{font-size:42px;color:#9cffd0;text-shadow:0 0 24px #00ffad66}
+p{max-width:700px;font-size:18px;line-height:1.6;margin-top:20px;color:#dfefff}
+a{color:#7ac7ff;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="starfield"></div><div class="starfield2"></div><div class="starfield3"></div>
+<main>
+  <h1>Objetivos</h1>
+  <p>Buscamos fusionar creatividad, diseño y tecnología para construir un ....</p>
+  <a href="#" onclick="history.back()">← Volver a Galaxy Droids</a>
+</main>
+</body>
+</html>
